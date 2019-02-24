@@ -1,0 +1,9 @@
+#menu-main {
+    margin-top: 30px;
+}
+
+.menu-item {
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
