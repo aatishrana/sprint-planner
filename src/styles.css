@@ -45,9 +45,13 @@ button:hover {
 .main-div {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 92%;
     padding: 30px;
     overflow: auto;
+}
+
+.flex {
+    display: flex;
 }
 
 .main-button {

@@ -3,12 +3,29 @@
     margin: 0 auto;
 }
 
-.story-info {
+.story {
     height: 120px;
     min-height: 100px;
+}
+
+.story-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.story-option {
+    margin-left: auto;
+    align-items: center;
+}
+
+.story-option>button {
+    height: 30px;
+    margin: 0 0 0 5px;
+}
+
+.story-remove-btn {
+    background-color: #cc0000;
 }
 
 .story-info-members {

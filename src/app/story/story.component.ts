@@ -45,6 +45,10 @@ export class StoryComponent implements OnInit {
     this.dataService.addStory(this.tempStory);
   }
 
+  onRemoveStoryClick(index) {
+    this.dataService.removeStory(index);
+  }
+
   clearFormData() {
     this.tempStory = new Story(0, '', '', '', '');
   }
