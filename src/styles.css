@@ -13,6 +13,29 @@ p, pre, h1, h2, h3, h4, h5, h6 {
     font-family: 'Exo', sans-serif;
 }
 
+button {
+    background-color: #1683fb;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #136fd5;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.pointer:hover {
+    background-color: #333333;
+}
+
+.pointer:focus {
+    outline: 0;
+}
+
 .m-l-30 {
     margin-left: 30px;
 }

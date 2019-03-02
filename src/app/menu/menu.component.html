@@ -1,5 +1,5 @@
 <div id="menu-main">
-  <div *ngFor="let menu of menus" class="menu-item">
-    <p class="m-l-30 text-white">{{menu}}</p>
+  <div *ngFor="let menu of menus" class="menu-item pointer" [routerLink]="menu">
+    <p class="m-l-30 text-white"  >{{menu | titlecase}}</p>
   </div>
 </div>

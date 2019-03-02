@@ -1,0 +1,68 @@
+<div id="team-div">
+
+  <button id="add-btn" (click)="onAddClick()">{{btnText}}</button>
+
+  <div class="member-add" *ngIf="showAddForm">
+
+    <table>
+      <tr>
+        <td>
+          <h4>First Name</h4>
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="tempMember.firstName" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h4>Last Name</h4>
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="tempMember.lastName" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h4>Role</h4>
+        </td>
+        <td>
+          <select [(ngModel)]="tempMember.role" (change)="OnPageSelected($event.target.value)">
+            <option>Enggineer</option>
+            <option>CMZ</option>
+            <option>Owner</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h4>Capacity per day</h4>
+        </td>
+        <td>
+          <input type="number" max="8" min="0" [(ngModel)]="tempMember.capacity" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h4>No. of days off</h4>
+        </td>
+        <td>
+          <input type="number" max="8" min="0" [(ngModel)]="tempMember.offDays" />
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div *ngFor="let member of team" class="member-div">
+    <div class="member-logo" [ngStyle]="{'background-color':member.color}">
+      <p style="font-size: 2em;">{{getInitials(member.firstName, member.lastName)}}</p>
+    </div>
+    <div class="member-info">
+      <p style="font-size: 1.5em;">Name: {{member.firstName | titlecase}} {{member.lastName | titlecase}}</p>
+      <p>Role: {{member.role}}</p>
+      <p>Capacity: {{member.capacity}} hours a day</p>
+      <p>Days Off: {{member.offDays}} days</p>
+    </div>
+    <button class="member-remove-btn">Remove</button>
+  </div>
+
+</div>

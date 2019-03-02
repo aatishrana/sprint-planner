@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  menus = ["Home", "Capacity"];
+  menus = ["home", "team", "story"];
 
   constructor() { }
 
