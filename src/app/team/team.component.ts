@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Member } from '../model/member'
+import { DataService } from '../common/data.service';
 
 @Component({
   selector: 'app-team',
@@ -14,10 +15,12 @@ export class TeamComponent implements OnInit {
   team: Member[] = [];
   tempMember: Member;
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.clearFormData();
+    this.team = this.dataService.team.getValue();
+    this.dataService.team.subscribe(members => this.team = members);
   }
 
   onAddClick() {
@@ -30,12 +33,17 @@ export class TeamComponent implements OnInit {
   }
 
   saveFormData() {
-    this, this.tempMember.color = this.getRandomColor();
-    this.team.push(Object.assign({}, this.tempMember));
+    this.tempMember.color = this.getRandomColor();
+    this.tempMember.id = this.tempMember.firstName + '-' + this.tempMember.lastName;
+    this.dataService.addMember(this.tempMember);
+  }
+
+  onRemoveClick(index) {
+    this.dataService.removeMember(index);
   }
 
   clearFormData() {
-    this.tempMember = new Member('', '', '', 0, 0, '');
+    this.tempMember = new Member('', '', '', 0, 0, '', '');
   }
 
   getInitials(firstName: string, lastName: string): string {
