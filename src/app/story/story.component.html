@@ -1,3 +1,66 @@
-<p>
-  story works!
-</p>
+<div class="main-div">
+
+  <button class="main-button" (click)="onMainBtnClick()">{{btnText}}</button>
+
+  <div *ngIf="showAddForm" class="new-story-div">
+    <table>
+      <tr>
+        <td>
+          <h4>ID</h4>
+        </td>
+        <td>
+          <input type="number" [(ngModel)]="tempStory.id" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h4>Title</h4>
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="tempStory.title" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h4>Developer</h4>
+        </td>
+        <td>
+          <select [(ngModel)]="tempStory.developer">
+            <option *ngFor="let member of developers">{{member.firstName}}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h4>Tester</h4>
+        </td>
+        <td>
+          <select [(ngModel)]="tempStory.tester">
+            <option>N/A</option>
+            <option *ngFor="let member of testers">{{member.firstName}}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h4>Owner</h4>
+        </td>
+        <td>
+          <select [(ngModel)]="tempStory.owner">
+            <option *ngFor="let member of owners">{{member.firstName}}</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div *ngFor="let story of stories" class="story-info">
+    <h4 style="color: #acacac;">{{story.id}}</h4>
+    <h3>{{story.title}}</h3>
+    <div class="story-info-members">
+      <p class="border-developer member">{{story.developer}}</p>
+      <p class="border-tester member">{{story.tester}}</p>
+      <p class="border-owner member">{{story.owner}}</p>
+    </div>
+  </div>
+</div>

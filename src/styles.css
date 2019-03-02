@@ -6,6 +6,7 @@ window, html, body {
     margin: 0;
     padding: 0;
     background-color: #39414d;
+    overflow: hidden;
 }
 
 p, pre, h1, h2, h3, h4, h5, h6 {
@@ -13,11 +14,16 @@ p, pre, h1, h2, h3, h4, h5, h6 {
     font-family: 'Exo', sans-serif;
 }
 
+select {
+    width: 100%;
+}
+
 button {
     background-color: #1683fb;
     color: white;
     border: 0;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 button:hover {
@@ -36,10 +42,38 @@ button:hover {
     outline: 0;
 }
 
+.main-div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 30px;
+    overflow: auto;
+}
+
+.main-button {
+    width: 100px;
+    height: 40px;
+    min-height: 40px;
+    margin-bottom: 30px;
+    align-self: flex-end;
+}
+
 .m-l-30 {
     margin-left: 30px;
 }
 
 .text-white {
     color: white;
+}
+
+.border-developer {
+    border-left: 5px solid #0078cc;
+}
+
+.border-tester {
+    border-left: 5px solid #ff9d00;
+}
+
+.border-owner {
+    border-left: 5px solid #339933;
 }

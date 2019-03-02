@@ -1,6 +1,6 @@
-<div id="team-div">
+<div class="main-div">
 
-  <button id="add-btn" (click)="onAddClick()">{{btnText}}</button>
+  <button class="main-button" (click)="onMainBtnClick()">{{btnText}}</button>
 
   <div class="member-add" *ngIf="showAddForm">
 
@@ -27,8 +27,8 @@
         </td>
         <td>
           <select [(ngModel)]="tempMember.role">
-            <option>Enggineer</option>
-            <option>CMZ</option>
+            <option>Developer</option>
+            <option>Tester</option>
             <option>Owner</option>
           </select>
         </td>
@@ -56,7 +56,9 @@
     <div class="member-logo" [ngStyle]="{'background-color':member.color}">
       <p style="font-size: 2em;">{{getInitials(member.firstName, member.lastName)}}</p>
     </div>
-    <div class="member-info">
+    <div class="member-info" [ngClass]="{'border-developer':member.role=='Developer',
+  'border-tester':member.role=='Tester',
+'border-owner':member.role=='Owner'}">
       <p style="font-size: 1.5em;">Name: {{member.firstName | titlecase}} {{member.lastName | titlecase}}</p>
       <p>Role: {{member.role}}</p>
       <p>Capacity: {{member.capacity}} hours a day</p>

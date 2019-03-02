@@ -23,7 +23,7 @@ export class TeamComponent implements OnInit {
     this.dataService.team.subscribe(members => this.team = members);
   }
 
-  onAddClick() {
+  onMainBtnClick() {
     if (this.showAddForm) {
       this.saveFormData();
       this.clearFormData();
