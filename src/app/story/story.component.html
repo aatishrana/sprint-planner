@@ -54,7 +54,7 @@
     </table>
   </div>
 
-  <div *ngFor="let story of stories; let i = index" class="flex story">
+  <div *ngFor="let story of stories; let i = index" class="flex" [ngClass]="{'story-collapsed': expandedStoryIndex != i, 'story-expanded': expandedStoryIndex == i}">
     <div class="story-info">
       <h4 style="color: #acacac;">{{story.id}}</h4>
       <h3>{{story.title}}</h3>
@@ -65,8 +65,68 @@
       </div>
     </div>
     <div class="flex story-option">
-      <button class="task-btn">Add Task</button>
-      <button class="story-remove-btn" (dblclick)="onRemoveStoryClick(i)">Remove</button>
+      <div *ngFor="let task of story.tasks" style="height: 30px; border-right: 1px solid white;" class="tooltip" [ngStyle]="{'width':getWidth(task.hours), 'background-color':getColor(task.taskFor)}">
+        <span class="tooltiptext">{{task.title}}</span>
+      </div>
+      <div class="new-task-div" *ngIf="expandedStoryIndex == i">
+        <table>
+          <tr>
+            <td>
+              <h4>Title</h4>
+            </td>
+            <td>
+              <input type="text" class="w-100" [(ngModel)]="tempTask.title" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h4>Task for</h4>
+            </td>
+            <td>
+              <select class="w-100" [(ngModel)]="tempTask.taskFor">
+                <option value="Developer">{{story.developer}}</option>
+                <option value="Tester" *ngIf="story.tester!='N/A'">{{story.tester}}</option>
+                <option value="Owner">{{story.owner}}</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h4>Seq</h4>
+            </td>
+            <td>
+              <select class="w-100" [(ngModel)]="tempTask.seq">
+                <option [value]="0">During Development</option>
+                <option [value]="1">After Development</option>
+                <option [value]="2">After Testing</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h4>Hours</h4>
+            </td>
+            <td>
+              <select class="w-100" [(ngModel)]="tempTask.hours">
+                <option [value]="1">1 Hour</option>
+                <option [value]="2">2 Hour</option>
+                <option [value]="3">3 Hour</option>
+                <option [value]="4">4 Hour</option>
+                <option [value]="5">5 Hour</option>
+                <option [value]="6">6 Hour</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <button class="task-btn" (click)="onDoneTaskBtnClick()">Done</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <button class="task-btn" (click)="onAddTaskBtnClick(i)" *ngIf="expandedStoryIndex == -1">Add Task</button>
+      <button class="story-remove-btn" (dblclick)="onRemoveStoryClick(i)" *ngIf="expandedStoryIndex == -1">Remove</button>
     </div>
   </div>
 </div>

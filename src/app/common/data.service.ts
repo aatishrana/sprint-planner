@@ -2,6 +2,7 @@ import { Injectable } from '../../../node_modules/@angular/core';
 import { BehaviorSubject } from '../../../node_modules/rxjs';
 import { Member } from '../model/member'
 import { Story } from '../model/story';
+import { Task } from '../model/task';
 
 @Injectable({
     providedIn: 'root',
@@ -9,7 +10,6 @@ import { Story } from '../model/story';
 export class DataService {
 
     public team = new BehaviorSubject<Member[]>([]);
-
     public stories = new BehaviorSubject<Story[]>([]);
 
     public addMember(member: Member) {
@@ -29,6 +29,12 @@ export class DataService {
     public removeStory(index: number) {
         const stories = this.stories.getValue();
         stories.splice(index, 1);
+        this.stories.next(stories);
+    }
+
+    public addTask(task: Task, index: number) {
+        const stories = this.stories.getValue();
+        stories[index].tasks.push(Object.assign({}, task));
         this.stories.next(stories);
     }
 }

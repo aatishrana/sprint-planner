@@ -3,9 +3,17 @@
     margin: 0 auto;
 }
 
-.story {
-    height: 120px;
+.story-collapsed {
+    height: 100px;
     min-height: 100px;
+    padding: 5px;
+}
+
+.story-expanded {
+    height: 200px;
+    min-height: 200px;
+    padding: 5px;
+    background-color: #eeeeee;
 }
 
 .story-info {
@@ -37,4 +45,8 @@
 .member {
     padding-left: 5px;
     flex: 1;
+}
+
+.new-task-div {
+    margin-right: 20px;
 }

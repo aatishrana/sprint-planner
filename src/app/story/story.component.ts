@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../common/data.service';
 import { Member } from '../model/member';
 import { Story } from '../model/story';
+import { Task } from '../model/task';
 
 @Component({
   selector: 'app-story',
@@ -10,8 +11,10 @@ import { Story } from '../model/story';
 })
 export class StoryComponent implements OnInit {
 
+  expandedStoryIndex = -1;
   btnText = 'Add Story';
   showAddForm = false;
+  tempTask: Task;
   tempStory: Story;
   stories: Story[];
 
@@ -41,6 +44,19 @@ export class StoryComponent implements OnInit {
     this.btnText = this.showAddForm ? 'Save Story' : 'Add Story';
   }
 
+  onAddTaskBtnClick(index) {
+    if (this.expandedStoryIndex == index) {
+      this.expandedStoryIndex = -1;
+      return;
+    }
+    this.expandedStoryIndex = index;
+  }
+
+  onDoneTaskBtnClick() {
+    this.dataService.addTask(this.tempTask, this.expandedStoryIndex);
+    this.expandedStoryIndex = -1;
+  }
+
   saveFormData() {
     this.dataService.addStory(this.tempStory);
   }
@@ -49,7 +65,23 @@ export class StoryComponent implements OnInit {
     this.dataService.removeStory(index);
   }
 
+  getWidth(hour) {
+    return hour * 4 + 'px';
+  }
+
+  getColor(taskFor) {
+    if (taskFor == 'Developer')
+      return '#0078cc';
+    else if (taskFor == 'Tester')
+      return '#ff9d00';
+    else if (taskFor == 'Owner')
+      return '#339933';
+    else
+      return '#000000';
+  }
+
   clearFormData() {
-    this.tempStory = new Story(0, '', '', '', '');
+    this.tempStory = new Story(0, '', '', '', '', []);
+    this.tempTask = new Task('', 0, '', 0);
   }
 }

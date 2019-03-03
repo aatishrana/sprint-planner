@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import 'assets/tooltip.css';
 window, html, body {
     height: 100%;
     width: 100%;
@@ -40,6 +41,10 @@ button:hover {
 
 .pointer:focus {
     outline: 0;
+}
+
+.w-100 {
+    width: 100%;
 }
 
 .main-div {
