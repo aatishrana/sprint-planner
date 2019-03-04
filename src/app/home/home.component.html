@@ -2,4 +2,61 @@
 
   <!-- <button class="main-button">{{btnText}}</button> -->
 
+  <h2 *ngIf="!showDetails">Add team details and stories</h2>
+
+  <div *ngIf="showDetails">
+    <table>
+      <tr>
+        <td>
+          <h4>Sprint start</h4>
+        </td>
+        <td>
+          <h4>Sprint last</h4>
+        </td>
+        <td></td>
+        <td>
+          <h4>Work week</h4>
+        </td>
+        <td>
+          <h4>Total Hours</h4>
+        </td>
+        <td rowspan="2">
+          <button class="home-btn" (click)="onBtnClick('story')">Story</button>
+          <button class="home-btn" (click)="onBtnClick('member')">Member</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="date" [ngModel]="startDate" (ngModelChange)="startDate = $event" />
+        </td>
+        <td>
+          <input type="date" [ngModel]="reviewDate" (ngModelChange)="reviewDate = $event" />
+        </td>
+        <td></td>
+        <td>
+          <select [(ngModel)]="workWeek">
+            <option value="0">Monday - Friday</option>
+            <option value="1">Monday - Saturday</option>
+          </select>
+        </td>
+        <td>
+          <p>{{getTotalHours()}}</p>
+        </td>
+      </tr>
+    </table>
+
+
+    <div class="dashboard-story" *ngIf="showStoryDashboard">
+    </div>
+
+    <div class="dashboard-story" *ngIf="showMemberDashboard">
+      <div *ngFor="let member of team" class="member-div">
+        <h4>{{member.firstName}}</h4>
+        <h6>{{getRole(member)}}</h6>
+        <div *ngFor="let day of workDays" class="day-div">
+          <h4>{{day}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -65,8 +65,10 @@
       </div>
     </div>
     <div class="flex story-option">
-      <div *ngFor="let task of story.tasks" style="height: 30px; border-right: 1px solid white;" class="tooltip" [ngStyle]="{'width':getWidth(task.hours), 'background-color':getColor(task.taskFor)}">
-        <span class="tooltiptext">{{task.title}}</span>
+      <h4 style="margin-right: 10px;">{{getTotalHours(story)}}</h4>
+      <div *ngFor="let task of story.tasks; let j = index" style="height: 30px; border-right: 1px solid white;" class="tooltip"
+        (dblclick)="onTaskClick(i, j)" [ngStyle]="{'width':getWidth(task.hours), 'background-color':getColor(task.taskFor)}">
+        <span class="tooltiptext">{{task.title}} in {{task.hours}} Hours</span>
       </div>
       <div class="new-task-div" *ngIf="expandedStoryIndex == i">
         <table>
@@ -114,6 +116,17 @@
                 <option [value]="4">4 Hour</option>
                 <option [value]="5">5 Hour</option>
                 <option [value]="6">6 Hour</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h4>After</h4>
+            </td>
+            <td>
+              <select [(ngModel)]="tempTask.after">
+                <option>N/A</option>
+                <option *ngFor="let task of story.tasks">{{task.title}}</option>
               </select>
             </td>
           </tr>

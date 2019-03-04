@@ -4,5 +4,6 @@ export class Task {
         public seq: number,
         public title: string,
         public hours: number,
+        public after: string,
     ) { }
 }

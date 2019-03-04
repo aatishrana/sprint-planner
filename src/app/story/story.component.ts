@@ -36,6 +36,11 @@ export class StoryComponent implements OnInit {
   }
 
   onMainBtnClick() {
+    if (this.developers.length == 0) {
+      alert('Add members in team');
+      return;
+    }
+
     if (this.showAddForm) {
       this.saveFormData();
       this.clearFormData();
@@ -57,6 +62,10 @@ export class StoryComponent implements OnInit {
     this.expandedStoryIndex = -1;
   }
 
+  onTaskClick(storyIndex: number, taskIndex: number) {
+    this.dataService.removeTask(storyIndex, taskIndex);
+  }
+
   saveFormData() {
     this.dataService.addStory(this.tempStory);
   }
@@ -65,8 +74,14 @@ export class StoryComponent implements OnInit {
     this.dataService.removeStory(index);
   }
 
+  getTotalHours(story: Story) {
+    return story.tasks.reduce((total, value: Task) => {
+      return total + +value.hours;
+    }, 0)
+  }
+
   getWidth(hour) {
-    return hour * 4 + 'px';
+    return hour * 5 + 'px';
   }
 
   getColor(taskFor) {
@@ -82,6 +97,6 @@ export class StoryComponent implements OnInit {
 
   clearFormData() {
     this.tempStory = new Story(0, '', '', '', '', []);
-    this.tempTask = new Task('', 0, '', 0);
+    this.tempTask = new Task('', 0, '', 0, '');
   }
 }
